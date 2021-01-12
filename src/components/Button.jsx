@@ -6,10 +6,7 @@ import PropTypes from 'prop-types'
 
 const Button = ({type, text, clickHandler}) => {
     return (
-        <button className={type} onClick={() =>{
-            console.log("onClick en el Button")
-            clickHandler(text)
-        }}>
+        <button className={type} onClick={() => clickHandler(text)}>
             <span>{text}</span>
         </button> 
     )
