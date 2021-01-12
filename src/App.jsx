@@ -5,13 +5,18 @@ import './App.css'
 
 // Función Flecha o Arrow Function
 const App = () => {
+
+    const clickHandlerFunction = text => {
+        console.log("Button.clickHandler", text)
+    }
+
     // Lo que ejecuta la función
     console.log("Renderización de App")
     return (
     <main className='react-calculator'>
         <Result value= {"0"} />
         <div className="numbers">
-            <Button text="1"/>
+            <Button text="1" clickHandler={clickHandlerFunction} />
             <button>2</button>
             <button>3</button>
             <button>4</button>
