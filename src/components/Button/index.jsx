@@ -1,9 +1,10 @@
 // importar react
 import React from 'react'
 import PropTypes from 'prop-types'
+import './Button.css'
 
 //componente fcional
-//tyoe = butto-long-text
+//tyoe = button-long-text
 const Button = ({type, text, clickHandler}) => (
     <button className={type} onClick={() => clickHandler(text)}>
         <span>{text}</span>
