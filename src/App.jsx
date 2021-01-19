@@ -11,15 +11,15 @@ import './App.css'
 const App = () => {
    
    
-   
-    //array destructuring
-    const [stack, setStack] = useState ("")
 
-    const items = words(stack, /[^-^+^*^/]+/g)
+    //array destructuring
+    const [stack, setStack] = useState ("0")
+     const items = words(stack, /[^-^+^*^/]+/g)
     //es similar a un if 
     //esVerdadero ? resultadoPorVerdadero : resultadoPorFalso
     const value= items.length > 0 ? items[items.length-1] : "0"
-       // Lo que ejecuta la función
+
+    // Lo que ejecuta la función
     console.log("Renderización de App", items)
    
     return (
@@ -32,7 +32,7 @@ const App = () => {
         <Functions
             onContentClear={() => {
                 console.log("Content Clear:")
-                setStack('')
+                setStack('0')
             }}
             onDelete={() => {
                 if(stack.length >0) {
@@ -49,10 +49,10 @@ const App = () => {
                 setStack(`${stack}${operation}`)
 
             }}
-            onClickEqual={equal =>{
-                console.log("Equal:", equal)
-            //    setStack(`${stack}${equal}`)
-                  setStack(eval(stack).toString())
+            onClickEqual={equal => {
+                    console.log("Equal:", equal)
+                    debugger
+                    setStack(eval(stack).toString())
             }}
             />
     </main>)
