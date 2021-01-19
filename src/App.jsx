@@ -1,49 +1,59 @@
-import React from 'react'
-import Button from './components/Button'
+/* eslint no-eval: 0 */
+import React, {useState} from 'react'
+import words from 'lodash.words'
 import Functions from './components/Functions'
 import MathOperations from './components/MathOperations'
+import Numbers from './components/Numbers'
 import Result from './components/Result'
 import './App.css'
 
 // Función Flecha o Arrow Function
 const App = () => {
+   
+   
+   
+    //array destructuring
+    const [stack, setStack] = useState ("")
 
-    const clickHandlerFunction = text => {
-        console.log("Button.clickHandler", text)
-    }
-
-    // Lo que ejecuta la función
-    console.log("Renderización de App")
+    const items = words(stack, /[^-^+^*^/]+/g)
+    //es similar a un if 
+    //esVerdadero ? resultadoPorVerdadero : resultadoPorFalso
+    const value= items.length > 0 ? items[items.length-1] : "0"
+       // Lo que ejecuta la función
+    console.log("Renderización de App", items)
+   
     return (
     <main className='react-calculator'>
-        <Result value= {"0"} />
-        <div className="numbers">
-            <Button text="1" clickHandler={clickHandlerFunction} />
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button>0</button>
-        </div>
-
+        <Result value= {value} />
+        <Numbers onClickNumber={number=> {
+            console.log("Number:", number)  
+            setStack (`${stack}${number}`)   
+        }}/>
         <Functions
-            onContentClear={() =>
-                console.log("Content Clear:")}
-            onDelete={() =>
-                console.log("onDelete:")}
+            onContentClear={() => {
+                console.log("Content Clear:")
+                setStack('')
+            }}
+            onDelete={() => {
+                if(stack.length >0) {
+                    console.log("onDelete:")
+                    const newStack = stack.substring(0, stack.length -1)
+                    setStack(newStack)
+                }
+            }}
         />
 
         <MathOperations 
-            onClickOperation={operation => 
+            onClickOperation={operation => {
                 console.log("Operation:", operation)
-            }
-            onClickEqual={equal =>
+                setStack(`${stack}${operation}`)
+
+            }}
+            onClickEqual={equal =>{
                 console.log("Equal:", equal)
-            }
+            //    setStack(`${stack}${equal}`)
+                  setStack(eval(stack).toString())
+            }}
             />
     </main>)
 }
